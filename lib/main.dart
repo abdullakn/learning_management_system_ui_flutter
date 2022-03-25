@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:kids_education_platform/color_Scheme.dart';
+import 'package:kids_education_platform/home_page.dart';
 
 void main() {
   runApp(const MyApp());
@@ -16,6 +17,9 @@ class MyApp extends StatelessWidget {
       debugShowCheckedModeBanner: false,
     
       home: const MyHomePage(),
+      routes: {
+        '/HomePage':(context)=>HomePage()
+      },
     );
   }
 }
@@ -37,22 +41,23 @@ class _MyHomePageState extends State<MyHomePage> {
       body: SafeArea(child: Column(
         children: [
          Container(
-           padding: EdgeInsets.symmetric(horizontal: 25),
+          
+           padding: EdgeInsets.symmetric(horizontal: 25,vertical: 10),
            child: Row(
              mainAxisAlignment: MainAxisAlignment.spaceBetween,
              children: [
-               Text("GoKids.com",style: TextStyle(fontSize: 14,fontFamily: 'circe',fontWeight: FontWeight.w500),),
+               Text("GoKids.com",style: TextStyle(fontSize: 20,fontFamily: 'circe',fontWeight: FontWeight.w500),),
                Text("Skip",style: TextStyle(fontSize: 14,fontFamily: 'circe',fontWeight: FontWeight.w500),),
              ],
            ),
          ),
-         SizedBox(height: 30,),
+         SizedBox(height: 10,),
          Container(
            
            width: MediaQuery.of(context).size.width,
            height: MediaQuery.of(context).size.height*0.4,
            decoration: BoxDecoration(
-             
+           
              image: DecorationImage(image: AssetImage('assets/images/splash.png',),fit: BoxFit.cover)
            ),
          ),
@@ -76,7 +81,7 @@ class _MyHomePageState extends State<MyHomePage> {
                      shape: BoxShape.circle,
                      color:darkBlue
                    ),
-                   child: IconButton(onPressed: (){}, icon: Icon(Icons.arrow_forward_ios_outlined,color: Colors.white,size: 20,)),
+                   child: IconButton(onPressed: (){openHomePage();}, icon: Icon(Icons.arrow_forward_ios_outlined,color: Colors.white,size: 20,)),
                  ),
                ),
              )
@@ -89,5 +94,9 @@ class _MyHomePageState extends State<MyHomePage> {
 
 
     );
+  }
+
+  void openHomePage(){
+    Navigator.pushNamed(context,'/HomePage');
   }
 }
