@@ -1,8 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:kids_education_platform/color_Scheme.dart';
+import 'package:kids_education_platform/models/tutuor.dart';
 
 class HomePage extends StatelessWidget {
    HomePage({ Key? key }) : super(key: key);
+
+   final tutor=Tutor.getAllTutor();
 
   @override
   Widget build(BuildContext context) {
@@ -63,7 +66,62 @@ class HomePage extends StatelessWidget {
                   ],
                 ),
               ),
-            )
+            ),
+            Expanded(child: Container(
+              padding: EdgeInsets.all(25),
+              width: MediaQuery.of(context).size.width,
+              color: Colors.white,
+              child: Column(
+                children: [
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      Text("Top Rated Tutuor",style: TextStyle(fontSize: 16,fontWeight: FontWeight.w700,)),
+                      Text("See All",style: TextStyle(color: Colors.blueAccent,fontSize: 13),)
+                    ],
+                  ),
+                  Expanded(
+                    child: SingleChildScrollView(
+                      child: Column(
+                        children: [
+                          Container(
+                            margin: EdgeInsets.symmetric(vertical: 5),
+                            height: 70,
+                            color: Colors.red,
+                          ),
+                           Container(
+                            margin: EdgeInsets.symmetric(vertical: 5),
+                            height: 70,
+                            color: Colors.red,
+                          ),
+                           Container(
+                            margin: EdgeInsets.symmetric(vertical: 5),
+                            height: 70,
+                            color: Colors.red,
+                          ),
+                           Container(
+                            margin: EdgeInsets.symmetric(vertical: 5),
+                            height: 70,
+                            color: Colors.red,
+                          ),
+                           Container(
+                            margin: EdgeInsets.symmetric(vertical: 5),
+                            height: 70,
+                            color: Colors.red,
+                          ),
+                           Container(
+                            margin: EdgeInsets.symmetric(vertical: 5),
+                            height: 70,
+                            color: Colors.red,
+                          ),
+                        ],
+                      ),
+                    ),
+                  )
+                ],
+              ),
+              
+            ))
           ],
         ),
     );
