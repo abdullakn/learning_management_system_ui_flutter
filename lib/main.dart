@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:kids_education_platform/color_Scheme.dart';
 import 'package:kids_education_platform/home_page.dart';
+import 'package:kids_education_platform/sample.dart';
 
 void main() {
   runApp(const MyApp());
