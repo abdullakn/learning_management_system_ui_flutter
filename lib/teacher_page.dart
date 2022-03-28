@@ -1,14 +1,23 @@
 import 'package:flutter/material.dart';
 import 'package:kids_education_platform/color_Scheme.dart';
+import 'package:kids_education_platform/course_card.dart';
+import 'package:kids_education_platform/models/course.dart';
 import 'package:kids_education_platform/models/tutuor.dart';
 import 'package:readmore/readmore.dart';
 
 class TeacherDeails extends StatelessWidget {
   final Tutor tutor;
-  const TeacherDeails({required this.tutor});
+  final course=Course.generateCourse();
+   TeacherDeails({required this.tutor});
 
   @override
   Widget build(BuildContext context) {
+    print("course");
+    print(course[1].color);
+    print(course[0].color);
+    print(course[2].color);
+    DateTime now = new DateTime.now();
+    print(now);
     return Scaffold(
       backgroundColor: Color(0xffe7f4f5),
       body: SafeArea(
@@ -137,8 +146,29 @@ class TeacherDeails extends StatelessWidget {
                       trimCollapsedText: '..Read More',
                       style: TextStyle(fontSize: 15),
                       trimExpandedText: ' Less',
-                      // moreStyle: TextStyle(fontSize: 14, fontWeight: FontWeight.bold,color: Colors.grey),
-                    )
+                      moreStyle: TextStyle(fontSize: 12, fontFamily: 'circe',color: Colors.blue),
+                    ),
+                    SizedBox(height: 20,),
+                    Text(
+                      "Course by ${tutor.name}",
+                      style: TextStyle(
+                          fontFamily: 'product',
+                          fontSize: 17,
+                          fontWeight: FontWeight.w700),
+                    ),
+                    SizedBox(height: 10,),
+                    Container(
+                      
+                      width: MediaQuery.of(context).size.width,
+                      height: 100,
+                      child: ListView.separated(
+                        
+                        scrollDirection: Axis.horizontal,
+                        itemBuilder:(_,index)=>CourseCard(course: course[index]),
+                         separatorBuilder: (_,index)=>SizedBox(width: 10,), 
+                         itemCount: course.length),
+                    ),
+                    SizedBox(height: 20,)
                   ],
                 ),
               ),
