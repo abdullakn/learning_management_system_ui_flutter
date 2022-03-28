@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:kids_education_platform/color_Scheme.dart';
 import 'package:kids_education_platform/models/tutuor.dart';
+import 'package:readmore/readmore.dart';
 
 class TeacherDeails extends StatelessWidget {
   final Tutor tutor;
@@ -108,7 +109,8 @@ class TeacherDeails extends StatelessWidget {
                 ))
               ],
             ),
-            Expanded(child: Container(
+            Expanded(
+                child: Container(
               padding: EdgeInsets.all(30),
               width: MediaQuery.of(context).size.width,
               color: Colors.white,
@@ -116,7 +118,27 @@ class TeacherDeails extends StatelessWidget {
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    Text("About",style: TextStyle(fontFamily:'product',fontSize: 17,fontWeight: FontWeight.w700),)
+                    Text(
+                      "About",
+                      style: TextStyle(
+                          fontFamily: 'product',
+                          fontSize: 17,
+                          fontWeight: FontWeight.w700),
+                    ),
+                    SizedBox(
+                      height: 10,
+                    ),
+                    ReadMoreText(
+                      tutor.about,
+                      trimLines: 3,
+
+                      colorClickableText: Colors.pink,
+                      trimMode: TrimMode.Line,
+                      trimCollapsedText: '..Read More',
+                      style: TextStyle(fontSize: 15),
+                      trimExpandedText: ' Less',
+                      // moreStyle: TextStyle(fontSize: 14, fontWeight: FontWeight.bold,color: Colors.grey),
+                    )
                   ],
                 ),
               ),
