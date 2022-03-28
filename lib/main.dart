@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:kids_education_platform/color_Scheme.dart';
 import 'package:kids_education_platform/home_page.dart';
+
 import 'package:kids_education_platform/sample.dart';
+import 'package:kids_education_platform/teacher_page.dart';
 
 void main() {
   runApp(const MyApp());
@@ -19,7 +21,9 @@ class MyApp extends StatelessWidget {
     
       home: const MyHomePage(),
       routes: {
-        '/HomePage':(context)=>HomePage()
+        '/HomePage':(context)=>HomePage(),
+        // '/TeacherPage':(context)=>TeacherDeails()
+        
       },
     );
   }
