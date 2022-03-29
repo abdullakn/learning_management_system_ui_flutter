@@ -26,6 +26,13 @@ class TeacherDeails extends StatelessWidget {
     DateTime now = new DateTime.now();
     print(now);
     return Scaffold(
+      appBar: AppBar(
+        elevation: 0,
+        backgroundColor: Colors.transparent,
+        leading:IconButton(onPressed: (){Navigator.of(context).pop();}, icon:Icon(Icons.arrow_back)) ,
+        
+      ),
+      extendBodyBehindAppBar: true,
       backgroundColor: Color(0xffe7f4f5),
       body: SafeArea(
         child: Column(
@@ -52,13 +59,16 @@ class TeacherDeails extends StatelessWidget {
                       Positioned(
                           left: 20,
                           bottom: 0,
-                          child: Container(
-                            width: MediaQuery.of(context).size.width * 0.4,
-                            height: 220,
-                            decoration: BoxDecoration(
-                                image: DecorationImage(
-                              image: AssetImage(tutor.proPic),
-                            )),
+                          child: Hero(
+                            tag: tutor.proPic,
+                            child: Container(
+                              width: MediaQuery.of(context).size.width * 0.4,
+                              height: 220,
+                              decoration: BoxDecoration(
+                                  image: DecorationImage(
+                                image: AssetImage(tutor.proPic),
+                              )),
+                            ),
                           )),
                     ],
                   ),
@@ -205,12 +215,50 @@ class TeacherDeails extends StatelessWidget {
                               ),
                           itemCount: date.length),
                     ),
+                    SizedBox(height: 10,),
+                    Container(
+                      child: Column(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          Row(
+                            children: [
+                               _timeSlotWidget("11 AM",true),
+                                _timeSlotWidget("12 PM",false),
+                                 _timeSlotWidget("1 PM",false),
+                                  _timeSlotWidget("2 AM",false)
+
+                            ],
+                          ),
+                             Row(
+                            children: [
+                               _timeSlotWidget("11 AM",false),
+                                _timeSlotWidget("12 PM",false),
+                                
+
+                            ],
+                          )
+                         
+                        ],
+                      ),
+                    )
                   ],
                 ),
               ),
             ))
           ],
         ),
+      ),
+      bottomNavigationBar: Container(
+        margin: EdgeInsets.symmetric(horizontal: 25,vertical: 10),
+        width: MediaQuery.of(context).size.width,
+        height: 50,
+        
+        decoration: BoxDecoration(
+          
+          borderRadius: BorderRadius.circular(10),
+          color: darkBlue,
+        ),
+        child: ElevatedButton(onPressed: (){},style: ElevatedButton.styleFrom(primary: darkBlue), child: Text("Book Appoinment",style: TextStyle(color: Colors.white),)),
       ),
     );
   }
@@ -229,5 +277,24 @@ class TeacherDeails extends StatelessWidget {
       date.add(formatted);
     }
     print(date);
+  }
+
+  Widget _timeSlotWidget(String time,bool isSelected) {
+    return Container(
+      padding: EdgeInsets.symmetric(horizontal: 12,vertical: 15),
+      margin: EdgeInsets.symmetric(horizontal: 3,vertical: 5),
+      decoration: BoxDecoration(
+        borderRadius: BorderRadius.circular(10),
+        color: isSelected?Colors.pink:lightBlue.withOpacity(0.3)
+      ),
+      child: Row(
+        children: [
+          Icon(Icons.watch_later,color: Colors.grey,size: 13,),
+          SizedBox(width: 3,),
+          Text(time,style: TextStyle(fontSize: 10,fontFamily: 'circe',fontWeight: FontWeight.bold),)
+        ],
+      ),
+    );
+
   }
 }
