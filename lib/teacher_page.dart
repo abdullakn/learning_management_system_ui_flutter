@@ -1,17 +1,24 @@
 import 'package:flutter/material.dart';
+import 'package:intl/intl.dart';
+
+
 import 'package:kids_education_platform/color_Scheme.dart';
 import 'package:kids_education_platform/course_card.dart';
+import 'package:kids_education_platform/date_card.dart';
 import 'package:kids_education_platform/models/course.dart';
 import 'package:kids_education_platform/models/tutuor.dart';
 import 'package:readmore/readmore.dart';
 
 class TeacherDeails extends StatelessWidget {
   final Tutor tutor;
-  final course=Course.generateCourse();
-   TeacherDeails({required this.tutor});
+  List<String> date = [];
+
+  final course = Course.generateCourse();
+  TeacherDeails({required this.tutor});
 
   @override
   Widget build(BuildContext context) {
+    fetchNextDate();
     print("course");
     print(course[1].color);
     print(course[0].color);
@@ -140,15 +147,19 @@ class TeacherDeails extends StatelessWidget {
                     ReadMoreText(
                       tutor.about,
                       trimLines: 3,
-
                       colorClickableText: Colors.pink,
                       trimMode: TrimMode.Line,
                       trimCollapsedText: '..Read More',
                       style: TextStyle(fontSize: 15),
                       trimExpandedText: ' Less',
-                      moreStyle: TextStyle(fontSize: 12, fontFamily: 'circe',color: Colors.blue),
+                      moreStyle: TextStyle(
+                          fontSize: 12,
+                          fontFamily: 'circe',
+                          color: Colors.blue),
                     ),
-                    SizedBox(height: 20,),
+                    SizedBox(
+                      height: 20,
+                    ),
                     Text(
                       "Course by ${tutor.name}",
                       style: TextStyle(
@@ -156,19 +167,44 @@ class TeacherDeails extends StatelessWidget {
                           fontSize: 17,
                           fontWeight: FontWeight.w700),
                     ),
-                    SizedBox(height: 10,),
+                    SizedBox(
+                      height: 10,
+                    ),
                     Container(
-                      
                       width: MediaQuery.of(context).size.width,
                       height: 100,
                       child: ListView.separated(
-                        
-                        scrollDirection: Axis.horizontal,
-                        itemBuilder:(_,index)=>CourseCard(course: course[index]),
-                         separatorBuilder: (_,index)=>SizedBox(width: 10,), 
-                         itemCount: course.length),
+                          scrollDirection: Axis.horizontal,
+                          itemBuilder: (_, index) =>
+                              CourseCard(course: course[index]),
+                          separatorBuilder: (_, index) => SizedBox(
+                                width: 10,
+                              ),
+                          itemCount: course.length),
                     ),
-                    SizedBox(height: 20,)
+                    SizedBox(
+                      height: 20,
+                    ),
+                     Text(
+                      "Availability",
+                      style: TextStyle(
+                          fontFamily: 'product',
+                          fontSize: 17,
+                          fontWeight: FontWeight.w700),
+                    ),
+                    SizedBox(height: 10,),
+                   Container(
+                      width: MediaQuery.of(context).size.width,
+                      height: 60,
+                      child: ListView.separated(
+                          scrollDirection: Axis.horizontal,
+                          itemBuilder: (_, index) =>
+                              DateCard(date: date[index]),
+                          separatorBuilder: (_, index) => SizedBox(
+                                width: 10,
+                              ),
+                          itemCount: date.length),
+                    ),
                   ],
                 ),
               ),
@@ -177,5 +213,21 @@ class TeacherDeails extends StatelessWidget {
         ),
       ),
     );
+  }
+
+
+
+
+  void fetchNextDate() {
+    print("function start");
+    DateTime now = new DateTime.now();
+
+    for (var i = 0; i < 10; i++) {
+      var newDate = new DateTime(now.year, now.month, now.day + i);
+      final DateFormat formatter = DateFormat('yyyy-MM-dd');
+      final String formatted = formatter.format(newDate);
+      date.add(formatted);
+    }
+    print(date);
   }
 }
